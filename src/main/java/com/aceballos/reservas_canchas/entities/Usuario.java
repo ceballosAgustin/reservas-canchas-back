@@ -52,6 +52,11 @@ public class Usuario {
     @Length(min = 2, max = 256)
     private String nombre;
 
+    @Column(nullable = false)
+    @NotBlank(message = "El apellido no puede estar vacío")
+    @Length(min = 2, max = 256)
+    private String apellido;
+
     @JsonIgnoreProperties({"usuarios", "handler", "hibernateLazyInitializer"})
     @ManyToMany
     @JoinTable(
