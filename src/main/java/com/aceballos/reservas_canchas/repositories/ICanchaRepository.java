@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.aceballos.reservas_canchas.entities.Cancha;
 
 @Repository
-public interface ICanchaRepository extends JpaRepository<Long, Cancha> {
+public interface ICanchaRepository extends JpaRepository<Cancha, Long> {
 
     public List<Cancha> findByCanchaActivaTrue();
 }

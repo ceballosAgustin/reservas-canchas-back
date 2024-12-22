@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.aceballos.reservas_canchas.entities.Usuario;
 
 @Repository
-public interface IUsuarioRepository extends JpaRepository<Long, Usuario>{
+public interface IUsuarioRepository extends JpaRepository<Usuario, Long>{
     
     public Optional<Usuario> findByEmail(String email);
 

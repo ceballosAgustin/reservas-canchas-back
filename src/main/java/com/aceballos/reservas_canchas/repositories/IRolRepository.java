@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.aceballos.reservas_canchas.entities.Rol;
 
 @Repository
-public interface IRolRepository extends JpaRepository<Long, Rol>{
+public interface IRolRepository extends JpaRepository<Rol, Long>{
     
     public Optional<Rol> findByNombre(String nombre);
 

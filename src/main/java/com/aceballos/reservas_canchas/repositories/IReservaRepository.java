@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.aceballos.reservas_canchas.entities.Reserva;
 
 @Repository
-public interface IReservaRepository extends JpaRepository<Long, Reserva> {
+public interface IReservaRepository extends JpaRepository<Reserva, Long> {
 
     public List<Reserva> findByCanchaIdCanchaAndFechaHoraBetween(Long idCancha, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin); 
 
