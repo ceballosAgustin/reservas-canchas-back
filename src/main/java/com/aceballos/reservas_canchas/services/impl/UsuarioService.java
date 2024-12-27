@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.aceballos.reservas_canchas.dtos.UsuarioDto;
 import com.aceballos.reservas_canchas.entities.Rol;
@@ -18,7 +19,7 @@ import com.aceballos.reservas_canchas.services.IUsuarioService;
 
 import jakarta.transaction.Transactional;
 
-
+@Service
 public class UsuarioService implements IUsuarioService{
 
     @Autowired

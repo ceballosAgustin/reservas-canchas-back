@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.aceballos.reservas_canchas.entities.Cancha;
 import com.aceballos.reservas_canchas.exceptions.NoEncontradoException;
@@ -13,7 +14,7 @@ import com.aceballos.reservas_canchas.services.ICanchaService;
 
 import jakarta.transaction.Transactional;
 
-
+@Service
 public class CanchaService implements ICanchaService{
 
     @Autowired

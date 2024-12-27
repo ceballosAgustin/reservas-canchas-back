@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.aceballos.reservas_canchas.entities.Reserva;
 import com.aceballos.reservas_canchas.exceptions.YaExisteException;
 import com.aceballos.reservas_canchas.repositories.IReservaRepository;
 import com.aceballos.reservas_canchas.services.IReservaService;
 
+@Service
 public class ReservaService implements IReservaService{
 
     @Autowired
