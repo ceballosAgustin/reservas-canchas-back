@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Service;
 
 import com.aceballos.reservas_canchas.dtos.LoginDto;
 import com.aceballos.reservas_canchas.entities.Usuario;
@@ -27,6 +28,7 @@ import io.jsonwebtoken.Jwts;
 
 import static com.aceballos.reservas_canchas.configuration.TokenJwtConfig.*;
 
+@Service
 public class AuthService implements IAuthService{
 
     @Autowired
