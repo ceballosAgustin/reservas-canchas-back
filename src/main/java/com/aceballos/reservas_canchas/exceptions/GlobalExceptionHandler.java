@@ -45,4 +45,12 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errores, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(CredencialesInvalidasException.class)
+    public ResponseEntity<Map<String, String>> manejarCredencialesInvalidasException(CredencialesInvalidasException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", "Credenciales inválidas");
+        response.put("mensaje", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
 }
