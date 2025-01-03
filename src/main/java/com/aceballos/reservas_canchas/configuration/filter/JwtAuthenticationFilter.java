@@ -17,9 +17,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.aceballos.reservas_canchas.entities.Usuario;
+import com.aceballos.reservas_canchas.exceptions.CredencialesInvalidasException;
 import com.aceballos.reservas_canchas.repositories.IUsuarioRepository;
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Claims;
@@ -45,21 +44,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
-        
-        Usuario usuario = null;
-        String email = null;
-        String clave = null;
 
-        try {
-            usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
-            email = usuario.getEmail();
-            clave = usuario.getClave();
-        } catch (StreamReadException e) {
-            e.printStackTrace();
-        } catch (DatabindException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String email = request.getParameter("email");
+        String clave = request.getParameter("clave");
+
+        if (email == null || clave == null) {
+            throw new CredencialesInvalidasException("Email o clave no proporcionados");
         }
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, clave);
@@ -76,18 +66,19 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Usuario usuarioDb = usuarioRepository.findByEmail(email).get();
         String nombre = "%s %s".formatted(usuarioDb.getNombre(), usuarioDb.getApellido());
 
-        Collection<? extends GrantedAuthority> roles = usuario.getAuthorities();
+        Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
 
         Claims claims = Jwts.claims()
-                            .add("authorities", new ObjectMapper().writeValueAsString(roles))
-                            .add("email", email)
-                            .add("name", nombre)
-                            .build();
+                        .add("authorities", new ObjectMapper().writeValueAsString(roles))
+                        .add("email", email)
+                        .add("nombre", nombre)
+                        .build();
 
         String token = Jwts.builder()
                             .subject(email)
                             .claims(claims)
                             .expiration(new Date(System.currentTimeMillis() + 3600000))
+                            .issuedAt(new Date())
                             .signWith(SECRET_KEY)
                             .compact();
 
