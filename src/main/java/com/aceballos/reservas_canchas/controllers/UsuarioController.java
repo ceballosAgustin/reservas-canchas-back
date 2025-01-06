@@ -34,13 +34,13 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioNuevo, HttpStatus.CREATED);
     }
 
-    @GetMapping("/usuario/{email}")
+    @GetMapping("/usuarios/{email}")
     public ResponseEntity<?> obtenerUsuario(@PathVariable String email) {
         UsuarioDto usuarioDto = usuarioService.findByEmail(email);
         return ResponseEntity.ok(usuarioDto);
     }
 
-    @DeleteMapping("/usuario/{id}")
+    @DeleteMapping("/usuarios/{id}")
     public ResponseEntity<?> borrarUsuario(@PathVariable Long id) {
         Optional<Usuario> usuarioOptional = usuarioService.borrarUsuario(id);
         return ResponseEntity.ok(usuarioOptional.orElseThrow());
