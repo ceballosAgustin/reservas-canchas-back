@@ -16,5 +16,5 @@ public interface ICanchaService {
 
     public Cancha modificarCancha(Cancha cancha);
 
-    public Cancha borrarCancha(Cancha cancha);
+    public Cancha borrarCancha(Long idCancha);
 }

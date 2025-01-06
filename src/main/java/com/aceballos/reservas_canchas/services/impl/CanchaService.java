@@ -72,16 +72,16 @@ public class CanchaService implements ICanchaService{
 
     @Override
     @Transactional
-    public Cancha borrarCancha(Cancha cancha) {
-        Optional<Cancha> canchaOptional = canchaRepository.findById(cancha.getIdCancha());
+    public Cancha borrarCancha(Long idCancha) {
+        Cancha cancha = traerCancha(idCancha);
 
-        if(!canchaOptional.isPresent()) {
-            throw new NoEncontradoException(cancha.getIdCancha());
+        if(cancha == null) {
+            throw new NoEncontradoException(idCancha);
         }
 
         cancha.setCanchaActiva(false);
 
-        return Optional.of(canchaRepository.save(cancha)).orElseThrow();
+        return canchaRepository.save(cancha);
     }
 
 }
