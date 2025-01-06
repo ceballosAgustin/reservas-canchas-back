@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +53,14 @@ public class CanchaController {
     }
 
     @PutMapping("/canchas/{id}")
+    public ResponseEntity<Cancha> modificarCancha(@PathVariable Long idCancha, @RequestBody @Valid Cancha cancha) {
+        cancha.setIdCancha(idCancha);
+        Cancha canchaModificada = canchaService.modificarCancha(cancha);
+        return ResponseEntity.ok(canchaModificada);
+    }
+
+
+    @DeleteMapping("/canchas/{id}")
     public ResponseEntity<Cancha> borrarCancha(@PathVariable Long idCancha) {
         return ResponseEntity.ok(canchaService.borrarCancha(idCancha));
     }
