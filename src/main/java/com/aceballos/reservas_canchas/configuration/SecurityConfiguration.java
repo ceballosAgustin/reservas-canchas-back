@@ -51,7 +51,7 @@ public class SecurityConfiguration {
         .requestMatchers(HttpMethod.GET, "/api/canchas-activas").permitAll()
         .requestMatchers(HttpMethod.GET, "/api/canchas/{id}").hasRole("ADMINISTRADOR")
         .requestMatchers(HttpMethod.POST, "/api/canchas").hasRole("ADMINISTRADOR")
-        .requestMatchers(HttpMethod.PUT, "/api/canchas").hasRole("ADMINISTRADOR")
+        .requestMatchers(HttpMethod.PUT, "/api/canchas/{id}").hasRole("ADMINISTRADOR")
         .requestMatchers(HttpMethod.DELETE, "/api/canchas/{id}").hasRole("ADMINISTRADOR")
         .requestMatchers(HttpMethod.GET, "/api/reservas/{id}").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/reservas").permitAll()
