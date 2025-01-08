@@ -31,11 +31,11 @@ public class ReservaController {
 
     @GetMapping("/reservas/{id}")
     public ResponseEntity<List<Reserva>> traerReservasPorCanchaYFecha(
-        @PathVariable Long idCancha, 
+        @PathVariable Long id, 
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaHoraInicio, 
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaHoraFin) {
         
-        List<Reserva> reservas = reservaService.traerReservasPorCanchaYFecha(idCancha, fechaHoraInicio, fechaHoraFin);
+        List<Reserva> reservas = reservaService.traerReservasPorCanchaYFecha(id, fechaHoraInicio, fechaHoraFin);
         return ResponseEntity.ok(reservas);
     }
 

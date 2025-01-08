@@ -41,8 +41,8 @@ public class CanchaController {
     }
 
     @GetMapping("/canchas/{id}") 
-    public ResponseEntity<Cancha> traerCancha(@PathVariable Long idCancha) {
-        Cancha cancha = canchaService.traerCancha(idCancha);
+    public ResponseEntity<Cancha> traerCancha(@PathVariable Long id) {
+        Cancha cancha = canchaService.traerCancha(id);
         return ResponseEntity.ok(cancha);
     }
 
@@ -53,15 +53,15 @@ public class CanchaController {
     }
 
     @PutMapping("/canchas/{id}")
-    public ResponseEntity<Cancha> modificarCancha(@PathVariable Long idCancha, @RequestBody @Valid Cancha cancha) {
-        cancha.setIdCancha(idCancha);
+    public ResponseEntity<Cancha> modificarCancha(@PathVariable Long id, @RequestBody @Valid Cancha cancha) {
+        cancha.setIdCancha(id);
         Cancha canchaModificada = canchaService.modificarCancha(cancha);
         return ResponseEntity.ok(canchaModificada);
     }
 
 
     @DeleteMapping("/canchas/{id}")
-    public ResponseEntity<Cancha> borrarCancha(@PathVariable Long idCancha) {
-        return ResponseEntity.ok(canchaService.borrarCancha(idCancha));
+    public ResponseEntity<Cancha> borrarCancha(@PathVariable Long id) {
+        return ResponseEntity.ok(canchaService.borrarCancha(id));
     }
 }
