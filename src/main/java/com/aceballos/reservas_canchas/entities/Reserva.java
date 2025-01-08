@@ -2,6 +2,8 @@ package com.aceballos.reservas_canchas.entities;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +36,7 @@ public class Reserva {
     @JoinColumn(name = "id_cancha", nullable = false)
     private Cancha cancha;
 
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fechaHora;
 }
