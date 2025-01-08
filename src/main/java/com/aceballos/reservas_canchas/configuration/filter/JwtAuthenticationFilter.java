@@ -1,9 +1,9 @@
 package com.aceballos.reservas_canchas.configuration.filter;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,10 +66,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Usuario usuarioDb = usuarioRepository.findByEmail(email).get();
         String nombre = "%s %s".formatted(usuarioDb.getNombre(), usuarioDb.getApellido());
 
-        Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
+        List<String> roles = authResult.getAuthorities().stream()
+                                        .map(GrantedAuthority::getAuthority)
+                                        .toList();
 
         Claims claims = Jwts.claims()
-                        .add("authorities", new ObjectMapper().writeValueAsString(roles))
+                        .add("authorities", roles)
                         .add("email", email)
                         .add("nombre", nombre)
                         .build();
